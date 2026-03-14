@@ -2,8 +2,43 @@ const Listing = require("../models/listing");
 
 module.exports.index = async(req,res)=>{
     const alllistings = await Listing.find({});
-    res.render("listings/index.ejs",{alllistings});
+    res.render("listings/index.ejs",{
+        alllistings,
+        searchQuery: "",
+        searchMeta: null,
+    });
 }
+
+module.exports.searchListings = async (req, res) => {
+    const searchQuery = (req.query.country || "").trim();
+
+    if (!searchQuery) {
+        const alllistings = await Listing.find({});
+        return res.render("listings/index.ejs", {
+            alllistings,
+            searchQuery: "",
+            searchMeta: null,
+        });
+    }
+
+    const searchRegex = new RegExp(searchQuery, "i");
+    const alllistings = await Listing.find({
+        $or: [
+            { country: searchRegex },
+            { location: searchRegex },
+            { title: searchRegex },
+        ],
+    });
+
+    res.render("listings/index.ejs", {
+        alllistings,
+        searchQuery,
+        searchMeta: {
+            label: searchQuery,
+            count: alllistings.length,
+        },
+    });
+};
 
 module.exports.rendernewform = (req,res)=>{
     res.render("listings/new.ejs");

@@ -1,26 +1,65 @@
 <% layout ("/layouts/boilerplate"); -%>
-<body>
-  <%= success %>
-    <h3>All Listings</h3>
-    <!-- <form method="get" action="/listings/new">
-        <button>Create new listing</button>
-    </form> -->
-    <div class="row row-cols-lg-3 row row-cols-md-2 row row-cols-sm-1">
-        <% for(let listing of alllistings){ %>
-            <a href="/listings/<%= listing._id %>" class="listing-link">
-            <div class="card col listing-card">
-                <img src="<%=listing.image.url%>" class="card-img-top" style="height: 20rem;" >
-                <div class="card-img-overlay"></div>
-                <div class="card-body">
-                  <p class="card-text">
-                   <b> <%= listing.title %> </b>
-                    <br>
-                    ₹<%= listing.price.toLocaleString("en-IN") %>
-                </p>
-                </div>
-              </div>
-            </a>
-              <% } %>
+<section class="listing-hero">
+  <div class="listing-hero-copy">
+    <p class="eyebrow">Curated escapes</p>
+    <h1><%= searchMeta ? "Search beautiful stays faster." : "Find your next stay with a little more style." %></h1>
+    <p class="hero-subtitle">
+      <%= searchMeta ? `Showing places that match "${searchMeta.label}" across titles, cities, and countries.` : "Browse homes, cabins, and city spots that feel worth the trip before you even pack." %>
+    </p>
+  </div>
+  <div class="listing-hero-stat">
+    <span class="stat-value"><%= alllistings.length %>+</span>
+    <span class="stat-label"><%= searchMeta ? "matching places found" : "handpicked places to explore" %></span>
+  </div>
+</section>
+
+<section class="listing-section">
+  <div class="section-heading">
+    <div>
+      <p class="section-kicker"><%= searchMeta ? "Search Results" : "All Listings" %></p>
+      <h2><%= searchMeta ? `Results for "${searchMeta.label}"` : "Stay somewhere memorable" %></h2>
     </div>
-</body>
+    <% if (searchMeta) { %>
+      <a href="/listings" class="results-reset">Clear search</a>
+    <% } %>
+  </div>
+
+  <% if (searchMeta) { %>
+    <div class="search-summary">
+      <span class="search-summary-pill"><%= searchMeta.count %> match<%= searchMeta.count === 1 ? "" : "es" %></span>
+      <span class="search-summary-text">Looking across listing titles, locations, and countries.</span>
+    </div>
+  <% } %>
+
+  <% if (!alllistings.length) { %>
+    <div class="empty-search-state">
+      <p class="section-kicker">No Matches Yet</p>
+      <h3>We couldn’t find any stays for "<%= searchMeta ? searchMeta.label : "" %>".</h3>
+      <p>Try a broader destination, another city name, or explore all listings again.</p>
+      <a href="/listings" class="btn btn-dark">View all listings</a>
+    </div>
+  <% } else { %>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+      <% for(let listing of alllistings){ %>
+          <div class="col">
+            <a href="/listings/<%= listing._id %>" class="listing-link">
+              <article class="card listing-card h-100">
+                  <div class="listing-image-wrap">
+                    <img src="<%=listing.image.url%>" class="card-img-top listing-img" alt="<%= listing.title %>" >
+                    <div class="listing-card-badge"><%= listing.country %></div>
+                  </div>
+                  <div class="card-body">
+                    <p class="listing-location"><%= listing.location %></p>
+                    <p class="card-text listing-copy">
+                     <b><%= listing.title %></b>
+                     <span>₹<%= listing.price.toLocaleString("en-IN") %> night</span>
+                    </p>
+                  </div>
+                </article>
+              </a>
+          </div>
+            <% } %>
+  </div>
+  <% } %>
+</section>
     

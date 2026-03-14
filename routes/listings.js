@@ -26,22 +26,7 @@ router.get("/:id/edit",isloggedin,isowner,wrapasync(listingcontroller.renderedit
 
 router.put("/:id",validatelisting,isowner,upload.single("listing[image][url]"),wrapasync(listingcontroller.editlisting));
 
-router.get("/search", async (req, res) => {
-
-    let { country } = req.query;
-
-    if (!country || country.trim() === "") {
-        const alllistings = await Listing.find({});
-        return res.render("listings/index", { alllistings });
-    }
-
-    const alllistings = await Listing.find({
-        country: { $regex: country, $options: "i" }
-    });
-
-    res.render("listings/index", { alllistings });
-
-});
+router.get("/search", wrapasync(listingcontroller.searchListings));
 
 //show route
 router.get("/:id", wrapasync(listingcontroller.showlisting));
