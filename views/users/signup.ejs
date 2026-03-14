@@ -1,26 +1,35 @@
 <% layout ("/layouts/boilerplate"); -%>
 
-<div class="row mt-3">
-    <h1 class="col-5 offset-4">SignUp on WanderLust</h1>
-    <div>
-        <form acton="/signup" method="post" class="needs-validation" novalidate>
-            <div class="mb-3 col-5 offset-3">
-                <label for="username" class="form-label" >Username</label>
-                <input name="username" id="username" type="text"class="form-control" required>
-                <div class="valid-feedback">username looks good!</div>
-            </div>
+<section class="auth-shell">
+    <div class="auth-panel">
+        <div class="auth-copy">
+            <p class="section-kicker">Start Hosting</p>
+            <h1>Create your WanderLust account.</h1>
+            <p>Join to save favorite stays, leave reviews, and add your own places to the platform.</p>
+        </div>
 
-            <div class="mb-3 col-5 offset-3">
-                <label for="email" class="form-label" >Email</label>
-                <input name="email" id="email" type="text"class="form-control" required>
-            </div>
+        <div class="auth-card">
+            <h2>Sign up on WanderLust</h2>
+            <form action="/signup" method="post" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="username" class="form-label" >Username</label>
+                    <input name="username" id="username" type="text" class="form-control auth-input" placeholder="Choose a username" required>
+                    <div class="valid-feedback">Username looks good!</div>
+                </div>
 
+                <div class="mb-3">
+                    <label for="email" class="form-label" >Email</label>
+                    <input name="email" id="email" type="email" class="form-control auth-input" placeholder="Enter your email" required>
+                </div>
 
-            <div class="mb-3 col-5 offset-3">
-                <label for="password" class="form-label" >Password</label>
-                <input name="password" id="password" type="password"class="form-control" required>
-            </div>
-            <button class="btn btn-success offset-5">SignUp</button>
-        </form>
+                <div class="mb-3">
+                    <label for="password" class="form-label" >Password</label>
+                    <input name="password" id="password" type="password" class="form-control auth-input" placeholder="Create a password" required>
+                </div>
+                <button class="btn auth-submit-btn">Sign Up</button>
+            </form>
+
+            <p class="auth-switch">Already have an account? <a href="/login">Log in</a></p>
+        </div>
     </div>
-</div>
+</section>

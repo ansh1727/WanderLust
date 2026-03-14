@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg sticky-top site-navbar" >
+<nav class="navbar navbar-expand-md sticky-top site-navbar" >
     <div class="container-fluid">
       <a class="navbar-brand brand-mark" href="/listings">
         <i class="fa-solid fa-compass"></i>
@@ -7,7 +7,7 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="collapse navbar-collapse site-navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav nav-primary">
           <a class="nav-link" href="/listings">Explore</a>
           <a class="nav-link" href="/listings/new">Host a Stay</a>
@@ -32,11 +32,11 @@
 
           <div class="navbar-nav ms-auto nav-auth">
             <% if(!curruser) { %>
-            <a class="nav-link" href="/signup"><b>Sign Up</b></a>
-            <a class="nav-link nav-pill" href="/login"><b>Login</b></a>
+            <a class="nav-link nav-auth-link nav-auth-secondary" href="/signup"><b>Sign Up</b></a>
+            <a class="nav-link nav-auth-link nav-auth-primary" href="/login"><b>Login</b></a>
             <% }%>
             <% if(curruser) { %>
-            <a class="nav-link nav-pill" href="/logout">Log Out</a>
+            <a class="nav-link nav-auth-link nav-auth-primary" href="/logout">Log Out</a>
             <%}%>
           </div>
       </div>

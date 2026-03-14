@@ -1,21 +1,31 @@
 <% layout ("/layouts/boilerplate"); -%>
 
-<div class="row mt-3">
-    <h1 class="col-5 offset-4">Login on WanderLust</h1>
-    <div>
-        <form acton="/login" method="post" class="needs-validation" novalidate>
-            <div class="mb-3 col-5 offset-3">
-                <label for="username" class="form-label">Username</label>
-                <input name="username" id="username" type="text"class="form-control" required>
-                <div class="valid-feedback">username looks good!</div>
-            </div>
+<section class="auth-shell">
+    <div class="auth-panel">
+        <div class="auth-copy">
+            <p class="section-kicker">Welcome Back</p>
+            <h1>Log in to keep exploring your next getaway.</h1>
+            <p>Pick up where you left off, manage your listings, and plan the next stay in minutes.</p>
+        </div>
 
+        <div class="auth-card">
+            <h2>Login on WanderLust</h2>
+            <form action="/login" method="post" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input name="username" id="username" type="text" class="form-control auth-input" placeholder="Enter your username" required>
+                    <div class="valid-feedback">Username looks good!</div>
+                </div>
 
-            <div class="mb-3 col-5 offset-3">
-                <label for="password" class="form-label" >Password</label>
-                <input name="password" id="password" type="password"class="form-control" required>
-            </div>
-            <button class="btn btn-success offset-5">Login</button>
-        </form>
+                <div class="mb-3">
+                    <label for="password" class="form-label" >Password</label>
+                    <input name="password" id="password" type="password" class="form-control auth-input" placeholder="Enter your password" required>
+                </div>
+
+                <button class="btn auth-submit-btn">Login</button>
+            </form>
+
+            <p class="auth-switch">New here? <a href="/signup">Create an account</a></p>
+        </div>
     </div>
-</div>
+</section>
